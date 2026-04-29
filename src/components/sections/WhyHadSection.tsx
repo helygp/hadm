@@ -1,38 +1,15 @@
 import { Check, Minus } from "lucide-react";
-
-const agile = [
-  "Human teams interpret requirements",
-  "Backlogs guide execution",
-  "Sprints organize effort",
-  "Delivery depends on human production capacity",
-  "Governance often comes late",
-];
-const had = [
-  "Humans govern intent, risk and responsibility",
-  "Agents can participate in conception and delivery",
-  "Context guides autonomous execution",
-  "Value is validated continuously",
-  "Governance is embedded from the beginning",
-];
+import { useT } from "@/i18n/I18nProvider";
 
 export function WhyHadSection() {
+  const t = useT();
   return (
     <section id="method" className="had-section">
       <div className="had-wrap">
-        <SectionHead num="01" label="Why HAD" title="Agile organized humans. HAD organizes intelligence." lede="Agile was created for human teams delivering software. Today, AI agents can research, analyze, design, build, test, document and evolve digital products. The challenge is no longer only speed — it is governance, intent, trust and value validation." />
+        <SectionHead num={t.whyHad.num} label={t.whyHad.label} title={t.whyHad.title} lede={t.whyHad.lede} />
         <div className="grid grid-cols-1 md:grid-cols-2 had-hairline-2 border">
-          <Column
-            title="Traditional Agile"
-            kicker="Human-driven"
-            items={agile}
-            tone="muted"
-          />
-          <Column
-            title="HAD Method"
-            kicker="Human-governed, agent-powered"
-            items={had}
-            tone="bright"
-          />
+          <Column title={t.whyHad.agileTitle} kicker={t.whyHad.agileKicker} items={t.whyHad.agile} tone="muted" />
+          <Column title={t.whyHad.hadTitle} kicker={t.whyHad.hadKicker} items={t.whyHad.had} tone="bright" />
         </div>
       </div>
     </section>
