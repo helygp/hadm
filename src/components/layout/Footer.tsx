@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import { BrandMark } from "@/components/visuals/Orbital";
+import { useT } from "@/i18n/I18nProvider";
 
 export function Footer() {
+  const t = useT();
   return (
     <footer className="border-t had-hairline mt-0">
       <div className="had-wrap py-16 grid gap-12 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
@@ -11,35 +13,33 @@ export function Footer() {
             <span className="text-ink font-semibold">HAD Method</span>
           </div>
           <p className="font-display text-2xl mt-6 leading-tight text-ink">
-            Humans govern. <span className="text-warm italic">Agents conceive.</span><br />
-            AI delivers. <span className="text-accent">Value validates.</span>
+            {t.footer.tagA} <span className="text-warm italic">{t.footer.tagB}</span><br />
+            {t.footer.tagC} <span className="text-accent">{t.footer.tagD}</span>
           </p>
-          <p className="text-ink-3 text-sm mt-4 max-w-md">
-            An open methodology for human-governed agentic delivery of digital value.
-          </p>
+          <p className="text-ink-3 text-sm mt-4 max-w-md">{t.footer.intro}</p>
         </div>
-        <FooterCol title="Method" links={[
-          { to: "/#method", label: "Why HAD" },
-          { to: "/#loop", label: "Operating Loop" },
-          { to: "/#faq", label: "FAQ" },
+        <FooterCol title={t.footer.methodCol} links={[
+          { to: "/#method", label: t.footer.whyHad },
+          { to: "/#loop", label: t.footer.loop },
+          { to: "/#faq", label: t.footer.faq },
         ]} />
-        <FooterCol title="Resources" links={[
-          { to: "/artifacts", label: "Artifact Library" },
-          { to: "/toolkits", label: "AI Toolkits" },
-          { to: "/generator", label: "Instruction Generator" },
+        <FooterCol title={t.footer.resourcesCol} links={[
+          { to: "/artifacts", label: t.footer.artifactLib },
+          { to: "/toolkits", label: t.footer.aiTools },
+          { to: "/generator", label: t.footer.instr },
         ]} />
-        <FooterCol title="Community" links={[
-          { to: "/community", label: "Apply to Founding" },
-          { to: "/cases/submit", label: "Suggest a Use Case" },
-          { to: "/contribute", label: "Contribute" },
+        <FooterCol title={t.footer.communityCol} links={[
+          { to: "/community", label: t.footer.applyFounding },
+          { to: "/cases/submit", label: t.footer.suggestCase },
+          { to: "/contribute", label: t.footer.contribute },
         ]} />
       </div>
       <div className="had-wrap pb-10 pt-6 border-t had-hairline flex flex-col md:flex-row gap-3 justify-between items-start md:items-center">
         <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink-4">
-          © {new Date().getFullYear()} HAD Method · Open Community Methodology · v0.1
+          © {new Date().getFullYear()} HAD Method · {t.footer.copy} · v0.1
         </p>
         <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink-4">
-          Built under HAD Method
+          {t.footer.built}
         </p>
       </div>
     </footer>

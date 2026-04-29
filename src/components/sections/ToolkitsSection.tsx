@@ -6,27 +6,24 @@ import { copyToClipboard, downloadText } from "@/lib/download";
 import { SectionHead } from "@/components/sections/WhyHadSection";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
+import { useT } from "@/i18n/I18nProvider";
 
 interface Props { compact?: boolean; }
 
 export function ToolkitsSection({ compact }: Props) {
+  const t = useT();
   const list = compact ? toolkits.slice(0, 6) : toolkits;
   return (
     <section id="toolkits" className="had-section bg-bg-2">
       <div className="had-wrap">
-        <SectionHead
-          num="05"
-          label="AI Tool Configuration"
-          title="Make your AI tools work through HAD Method."
-          lede="Download tool-specific instruction files and configure your AI assistants, coding agents and software builders to operate under Human-Governed Agentic Delivery."
-        />
+        <SectionHead num={t.toolkitsSection.num} label={t.toolkitsSection.label} title={t.toolkitsSection.title} lede={t.toolkitsSection.lede} />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-[hsla(0,0%,100%,0.08)] border had-hairline-2">
-          {list.map((t) => <ToolkitCard key={t.id} t={t} />)}
+          {list.map((tk) => <ToolkitCard key={tk.id} t={tk} />)}
         </div>
         {compact && (
           <div className="mt-10 flex justify-center">
             <Button asChild variant="outline" className="rounded-none h-11 px-6 border had-hairline-2 font-mono text-[11px] uppercase tracking-[0.14em] bg-transparent">
-              <Link to="/toolkits">All toolkits <ArrowRight className="size-4 ml-2" /></Link>
+              <Link to="/toolkits">{t.toolkitsSection.allBtn} <ArrowRight className="size-4 ml-2" /></Link>
             </Button>
           </div>
         )}
@@ -36,14 +33,16 @@ export function ToolkitsSection({ compact }: Props) {
 }
 
 function ToolkitCard({ t }: { t: Toolkit }) {
+  const tr = useT();
   const { toast } = useToast();
+  const tk = tr.toolkits[t.id] ?? { blurb: t.blurb, setup: t.setup };
   const dl = (file: typeof t.files[number]) => {
     downloadText(file.name, resolveToolFile(t, file));
-    toast({ title: "Downloaded", description: file.name });
+    toast({ title: tr.toasts.downloaded, description: file.name });
   };
   const cp = async (file: typeof t.files[number]) => {
     const ok = await copyToClipboard(resolveToolFile(t, file));
-    toast({ title: ok ? "Copied" : "Copy failed", description: file.name, variant: ok ? "default" : "destructive" });
+    toast({ title: ok ? tr.toasts.copied : tr.toasts.copyFailed, description: file.name, variant: ok ? "default" : "destructive" });
   };
   return (
     <article className="bg-surface p-7 flex flex-col">
@@ -55,9 +54,9 @@ function ToolkitCard({ t }: { t: Toolkit }) {
           <h3 className="font-display text-2xl text-ink tracking-tight">{t.name}</h3>
         </div>
       </div>
-      <p className="text-ink-2 text-[15px] leading-relaxed">{t.blurb}</p>
+      <p className="text-ink-2 text-[15px] leading-relaxed">{tk.blurb}</p>
       <div className="mt-5 pt-4 border-t had-hairline">
-        <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink-3 mb-3">Files</div>
+        <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink-3 mb-3">{tr.toolkitsSection.files}</div>
         <ul className="flex flex-col gap-2">
           {t.files.map((f) => (
             <li key={f.name} className="flex items-center justify-between gap-2 group">
@@ -79,7 +78,7 @@ function ToolkitCard({ t }: { t: Toolkit }) {
           to={`/toolkits/${t.id}`}
           className="font-mono text-[10px] uppercase tracking-[0.14em] text-ink-2 hover:text-accent inline-flex items-center gap-2"
         >
-          Open guide <ArrowRight className="size-3.5" />
+          {tr.toolkitsSection.openGuide} <ArrowRight className="size-3.5" />
         </Link>
       </div>
     </article>
