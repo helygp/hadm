@@ -1,14 +1,23 @@
-import { Helmet } from "react-helmet-async";
+import { useEffect } from "react";
 
 interface SeoProps { title: string; description: string; }
 export function Seo({ title, description }: SeoProps) {
-  return (
-    <Helmet>
-      <title>{title}</title>
-      <meta name="description" content={description} />
-      <meta property="og:title" content={title} />
-      <meta property="og:description" content={description} />
-      <link rel="canonical" href={typeof window !== "undefined" ? window.location.href : ""} />
-    </Helmet>
-  );
+  useEffect(() => {
+    document.title = title;
+    let m = document.querySelector('meta[name="description"]');
+    if (!m) {
+      m = document.createElement("meta");
+      m.setAttribute("name", "description");
+      document.head.appendChild(m);
+    }
+    m.setAttribute("content", description);
+    let c = document.querySelector('link[rel="canonical"]');
+    if (!c) {
+      c = document.createElement("link");
+      c.setAttribute("rel", "canonical");
+      document.head.appendChild(c);
+    }
+    c.setAttribute("href", window.location.href);
+  }, [title, description]);
+  return null;
 }
