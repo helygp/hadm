@@ -1,3 +1,5 @@
+import { useT } from "@/i18n/I18nProvider";
+
 interface OrbitalProps {
   size?: number;
   animate?: boolean;
@@ -5,6 +7,7 @@ interface OrbitalProps {
 }
 
 export function Orbital({ size = 540, animate = true, className }: OrbitalProps) {
+  const tr = useT();
   const c = size / 2;
   const orbits = [110, 170, 230];
   const agents = [
@@ -43,16 +46,16 @@ export function Orbital({ size = 540, animate = true, className }: OrbitalProps)
       <g>
         <circle cx={c} cy={c} r="62" fill="hsl(var(--bg-2))" stroke="hsl(var(--warm))" strokeWidth="1.5" />
         <circle cx={c} cy={c} r="48" fill="none" stroke="hsl(var(--warm))" strokeOpacity=".35" strokeDasharray="1 4" />
-        <text x={c} y={c - 6} textAnchor="middle" fill="hsl(var(--warm))" fontFamily="var(--font-mono)" fontSize="9" letterSpacing="2">HUMAN</text>
-        <text x={c} y={c + 8} textAnchor="middle" fill="hsl(var(--warm))" fontFamily="var(--font-mono)" fontSize="9" letterSpacing="2">GOVERNANCE</text>
-        <text x={c} y={c + 22} textAnchor="middle" fill="hsl(var(--ink-3))" fontFamily="var(--font-mono)" fontSize="8" letterSpacing="2">CORE</text>
+        <text x={c} y={c - 6} textAnchor="middle" fill="hsl(var(--warm))" fontFamily="var(--font-mono)" fontSize="9" letterSpacing="2">{tr.orbital.human}</text>
+        <text x={c} y={c + 8} textAnchor="middle" fill="hsl(var(--warm))" fontFamily="var(--font-mono)" fontSize="9" letterSpacing="2">{tr.orbital.governance}</text>
+        <text x={c} y={c + 22} textAnchor="middle" fill="hsl(var(--ink-3))" fontFamily="var(--font-mono)" fontSize="8" letterSpacing="2">{tr.orbital.core}</text>
       </g>
       <path
         d={`M ${c} ${c + 62} Q ${c + 40} ${size - 40} ${size - 30} ${size - 30}`}
         fill="none" stroke="url(#had-flow)" strokeWidth="1.5" strokeDasharray="2 4"
       />
       <text x={size - 30} y={size - 12} textAnchor="end" fill="hsl(var(--accent-2))"
-        fontFamily="var(--font-mono)" fontSize="9" letterSpacing="2">VALUE FLOW →</text>
+        fontFamily="var(--font-mono)" fontSize="9" letterSpacing="2">{tr.orbital.valueFlow}</text>
       {agents.map((a, idx) => {
         const r = orbits[a.o];
         const [x, y] = pos(a.deg, r);
@@ -71,7 +74,7 @@ export function Orbital({ size = 540, animate = true, className }: OrbitalProps)
             <circle cx={x} cy={y} r="1.5" fill="hsl(var(--ink-3))" />
             <text x={x} y={y - 8} fill="hsl(var(--ink-4))" fontFamily="var(--font-mono)"
               fontSize="8" textAnchor="middle" letterSpacing="2">
-              {["DISCOVER", "CONCEIVE", "DELIVER", "VALIDATE"][i]}
+              {[tr.orbital.discover, tr.orbital.conceive, tr.orbital.deliver, tr.orbital.validate][i]}
             </text>
           </g>
         );
