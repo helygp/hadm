@@ -4,6 +4,7 @@ import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/co
 import { Slider } from "@/components/ui/slider";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { useT } from "@/i18n/I18nProvider";
 
 interface Tweaks {
   hue: number;          // shifts accent hue
@@ -27,6 +28,7 @@ function apply(t: Tweaks) {
 }
 
 export function TweaksPanel() {
+  const tr = useT();
   const [open, setOpen] = useState(false);
   const [t, setT] = useState<Tweaks>(() => {
     if (typeof window === "undefined") return DEFAULTS;
@@ -50,35 +52,35 @@ export function TweaksPanel() {
       <SheetContent side="right" className="bg-background border-l had-hairline-2 w-[92vw] max-w-[380px]">
         <SheetHeader>
           <SheetTitle className="font-mono text-[11px] uppercase tracking-[0.16em] text-ink-3">
-            Design Tweaks
+            {tr.tweaks.title}
           </SheetTitle>
         </SheetHeader>
         <div className="flex flex-col gap-7 mt-6">
-          <Field label={`Accent hue · ${t.hue}°`}>
+          <Field label={`${tr.tweaks.hue} · ${t.hue}°`}>
             <Slider value={[t.hue]} min={150} max={260} step={1}
               onValueChange={([v]) => setT({ ...t, hue: v })} />
           </Field>
-          <Field label={`Contrast · ${t.contrast.toFixed(2)}`}>
+          <Field label={`${tr.tweaks.contrast} · ${t.contrast.toFixed(2)}`}>
             <Slider value={[t.contrast * 100]} min={85} max={115} step={1}
               onValueChange={([v]) => setT({ ...t, contrast: v / 100 })} />
           </Field>
-          <Field label={`Density · ${t.density.toFixed(2)}`}>
+          <Field label={`${tr.tweaks.density} · ${t.density.toFixed(2)}`}>
             <Slider value={[t.density * 100]} min={85} max={120} step={1}
               onValueChange={([v]) => setT({ ...t, density: v / 100 })} />
           </Field>
-          <Field label={`Corner radius · ${t.radius}px`}>
+          <Field label={`${tr.tweaks.radius} · ${t.radius}px`}>
             <Slider value={[t.radius]} min={0} max={16} step={1}
               onValueChange={([v]) => setT({ ...t, radius: v })} />
           </Field>
-          <Field label={`Motion · ${Math.round(t.motion * 100)}%`}>
+          <Field label={`${tr.tweaks.motion} · ${Math.round(t.motion * 100)}%`}>
             <Slider value={[t.motion * 100]} min={0} max={100} step={5}
               onValueChange={([v]) => setT({ ...t, motion: v / 100 })} />
           </Field>
           <Button variant="outline" onClick={reset} className="rounded-none font-mono text-[11px] uppercase tracking-[0.12em] mt-2">
-            <RefreshCw className="size-3.5 mr-2" /> Reset to defaults
+            <RefreshCw className="size-3.5 mr-2" /> {tr.tweaks.reset}
           </Button>
           <p className="text-[11px] text-ink-4 leading-relaxed">
-            Live preview tokens. Changes persist locally and never affect other visitors.
+            {tr.tweaks.note}
           </p>
         </div>
       </SheetContent>

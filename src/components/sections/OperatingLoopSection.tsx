@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { operatingLoop, type LoopStep } from "@/data/method";
 import { SectionHead } from "@/components/sections/WhyHadSection";
+import { useT } from "@/i18n/I18nProvider";
 
 const ROLE_COLOR: Record<LoopStep["role"], string> = {
   Human: "hsl(var(--warm))",
@@ -10,8 +11,10 @@ const ROLE_COLOR: Record<LoopStep["role"], string> = {
 };
 
 export function OperatingLoopSection() {
+  const t = useT();
   const [active, setActive] = useState<string>(operatingLoop[0].id);
   const current = operatingLoop.find((s) => s.id === active)!;
+  const tCurrent = t.loop.steps[current.id] ?? { name: current.name, blurb: current.blurb, detail: current.detail };
   const size = 480;
   const c = size / 2;
   const r = 180;
@@ -20,30 +23,26 @@ export function OperatingLoopSection() {
   return (
     <section id="loop" className="had-section bg-bg-2">
       <div className="had-wrap">
-        <SectionHead
-          num="03"
-          label="Operating Loop"
-          title="The HAD Operating Loop."
-          lede="A continuous loop where humans govern, agents conceive, AI delivers and evidence validates. Seven stages with explicit ownership and autonomy contracts."
-        />
+        <SectionHead num={t.loop.num} label={t.loop.label} title={t.loop.title} lede={t.loop.lede} />
         <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr] items-start">
           <div className="relative w-full max-w-[520px] mx-auto aspect-square">
             <svg viewBox={`0 0 ${size} ${size}`} className="w-full h-full" aria-hidden="true">
               <circle cx={c} cy={c} r={r} fill="none" stroke="hsla(0,0%,100%,0.10)" strokeDasharray="2 6" />
               <circle cx={c} cy={c} r={60} fill="hsl(var(--surface))" stroke="hsl(var(--warm))" strokeWidth="1.5" />
-              <text x={c} y={c - 4} textAnchor="middle" fontFamily="var(--font-mono)" fontSize="9" letterSpacing="2" fill="hsl(var(--warm))">HUMAN</text>
-              <text x={c} y={c + 10} textAnchor="middle" fontFamily="var(--font-mono)" fontSize="9" letterSpacing="2" fill="hsl(var(--warm))">GOVERNANCE</text>
+              <text x={c} y={c - 4} textAnchor="middle" fontFamily="var(--font-mono)" fontSize="9" letterSpacing="2" fill="hsl(var(--warm))">{t.orbital.human}</text>
+              <text x={c} y={c + 10} textAnchor="middle" fontFamily="var(--font-mono)" fontSize="9" letterSpacing="2" fill="hsl(var(--warm))">{t.orbital.governance}</text>
               {operatingLoop.map((s, i) => {
                 const ang = (i / N) * 2 * Math.PI - Math.PI / 2;
                 const x = c + Math.cos(ang) * r;
                 const y = c + Math.sin(ang) * r;
                 const isActive = s.id === active;
+                const ts = t.loop.steps[s.id] ?? { name: s.name };
                 return (
                   <g key={s.id} onClick={() => setActive(s.id)} style={{ cursor: "pointer" }}>
                     <circle cx={x} cy={y} r={isActive ? 14 : 10} fill={isActive ? ROLE_COLOR[s.role] : "hsl(var(--surface-2))"} stroke={ROLE_COLOR[s.role]} strokeWidth={isActive ? 0 : 1.5} />
                     <text x={x} y={y + 32} textAnchor="middle" fontFamily="var(--font-mono)" fontSize="9" letterSpacing="2"
                       fill={isActive ? "hsl(var(--ink))" : "hsl(var(--ink-3))"}>
-                      {s.num} · {s.name.toUpperCase()}
+                      {s.num} · {ts.name.toUpperCase()}
                     </text>
                   </g>
                 );
@@ -56,22 +55,25 @@ export function OperatingLoopSection() {
               <span className="size-1 rounded-full bg-ink-4" />
               <span style={{ color: ROLE_COLOR[current.role] }}>{current.role}</span>
             </div>
-            <h3 className="font-display text-4xl md:text-5xl text-ink mt-3 tracking-tight">{current.name}</h3>
-            <p className="text-ink-2 mt-5 text-lg leading-relaxed">{current.blurb}</p>
-            <p className="text-ink-3 mt-4 text-[15px] leading-relaxed">{current.detail}</p>
+            <h3 className="font-display text-4xl md:text-5xl text-ink mt-3 tracking-tight">{tCurrent.name}</h3>
+            <p className="text-ink-2 mt-5 text-lg leading-relaxed">{tCurrent.blurb}</p>
+            <p className="text-ink-3 mt-4 text-[15px] leading-relaxed">{tCurrent.detail}</p>
             <div className="mt-8 flex flex-wrap gap-2">
-              {operatingLoop.map((s) => (
-                <button
-                  key={s.id}
-                  onClick={() => setActive(s.id)}
-                  className={`had-chip transition-colors ${
-                    s.id === active ? "border-ink text-ink" : "hover:border-ink-3"
-                  }`}
-                >
-                  <span className="size-1.5 rounded-full" style={{ background: ROLE_COLOR[s.role] }} />
-                  {s.num} {s.name}
-                </button>
-              ))}
+              {operatingLoop.map((s) => {
+                const ts = t.loop.steps[s.id] ?? { name: s.name };
+                return (
+                  <button
+                    key={s.id}
+                    onClick={() => setActive(s.id)}
+                    className={`had-chip transition-colors ${
+                      s.id === active ? "border-ink text-ink" : "hover:border-ink-3"
+                    }`}
+                  >
+                    <span className="size-1.5 rounded-full" style={{ background: ROLE_COLOR[s.role] }} />
+                    {s.num} {ts.name}
+                  </button>
+                );
+              })}
             </div>
           </div>
         </div>

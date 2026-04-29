@@ -1,19 +1,15 @@
-import { faqs } from "@/data/method";
 import { SectionHead } from "@/components/sections/WhyHadSection";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { useT } from "@/i18n/I18nProvider";
 
 export function FaqSection() {
+  const t = useT();
   return (
     <section id="faq" className="had-section">
       <div className="had-wrap">
-        <SectionHead
-          num="07"
-          label="FAQ"
-          title="Questions, answered plainly."
-          lede="What HAD is, what it isn't, and how to start using it with your tools today."
-        />
+        <SectionHead num={t.faqSection.num} label={t.faqSection.label} title={t.faqSection.title} lede={t.faqSection.lede} />
         <Accordion type="single" collapsible className="border-t had-hairline">
-          {faqs.map((f, i) => (
+          {t.faqs.map((f, i) => (
             <AccordionItem key={i} value={`q-${i}`} className="border-b had-hairline">
               <AccordionTrigger className="text-left py-6 font-display text-xl md:text-2xl text-ink tracking-tight hover:no-underline hover:text-accent transition-colors">
                 <span className="flex items-start gap-6">
