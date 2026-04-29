@@ -14,8 +14,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
-
-const GENERIC = { id: "generic", name: "Generic AI Tool" };
+import { useT } from "@/i18n/I18nProvider";
 
 const EMPTY = {
   toolId: "claude",
@@ -28,12 +27,15 @@ const EMPTY = {
 
 export function GeneratorWorkspace() {
   const { toast } = useToast();
+  const t = useT();
   const [s, setS] = useState(EMPTY);
 
-  const tool = toolkits.find((t) => t.id === s.toolId) ?? GENERIC;
+  const tool = toolkits.find((tk) => tk.id === s.toolId) ?? { id: "generic", name: t.generator.genericTool };
   const autonomy = autonomyLevels.find((a) => a.level === s.autonomyLevel)!;
+  const tAuton = t.autonomy[String(autonomy.level)] ?? { name: autonomy.name, description: autonomy.description };
   const input: GeneratorInput = {
-    toolId: tool.id, toolName: tool.name, usageType: s.usageType, autonomy,
+    toolId: tool.id, toolName: tool.name, usageType: s.usageType,
+    autonomy: { level: autonomy.level, name: tAuton.name, description: tAuton.description },
     initiative: s.initiative, problem: s.problem, users: s.users, value: s.value,
     risks: s.risks, dataSensitivity: s.dataSensitivity, approvals: s.approvals,
     environment: s.environment, tools: s.tools,
@@ -43,36 +45,35 @@ export function GeneratorWorkspace() {
 
   const onCopy = async () => {
     const ok = await copyToClipboard(md);
-    toast({ title: ok ? "Copied" : "Copy failed", variant: ok ? "default" : "destructive" });
+    toast({ title: ok ? t.toasts.copied : t.toasts.copyFailed, variant: ok ? "default" : "destructive" });
   };
-  const onDownload = () => { downloadText(filename, md); toast({ title: "Downloaded", description: filename }); };
-  const onSave = () => { saveFile(filename, md); toast({ title: "Saved to Starter Kit", description: filename }); };
+  const onDownload = () => { downloadText(filename, md); toast({ title: t.toasts.downloaded, description: filename }); };
+  const onSave = () => { saveFile(filename, md); toast({ title: t.toasts.saved, description: filename }); };
   const onReset = () => setS(EMPTY);
 
   return (
     <div className="grid gap-px bg-[hsla(0,0%,100%,0.08)] border had-hairline-2 lg:grid-cols-2">
-      {/* Form */}
       <div className="bg-surface p-7 md:p-9">
-        <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink-3 mb-6">Configure</div>
+        <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink-3 mb-6">{t.generator.configure}</div>
         <div className="grid gap-5">
-          <Row label="Tool">
+          <Row label={t.generator.tool}>
             <Select value={s.toolId} onValueChange={(v) => setS({ ...s, toolId: v })}>
               <SelectTrigger className="had-input"><SelectValue /></SelectTrigger>
               <SelectContent className="bg-surface border had-hairline-2 rounded-none">
-                {toolkits.map((t) => <SelectItem key={t.id} value={t.id} className="font-mono text-[12px]">{t.name}</SelectItem>)}
-                <SelectItem value="generic" className="font-mono text-[12px]">Generic AI Tool</SelectItem>
+                {toolkits.map((tk) => <SelectItem key={tk.id} value={tk.id} className="font-mono text-[12px]">{tk.name}</SelectItem>)}
+                <SelectItem value="generic" className="font-mono text-[12px]">{t.generator.genericTool}</SelectItem>
               </SelectContent>
             </Select>
           </Row>
-          <Row label="Usage type">
+          <Row label={t.generator.usage}>
             <Select value={s.usageType} onValueChange={(v) => setS({ ...s, usageType: v as UsageType })}>
               <SelectTrigger className="had-input"><SelectValue /></SelectTrigger>
               <SelectContent className="bg-surface border had-hairline-2 rounded-none">
-                {usageTypes.map((u) => <SelectItem key={u} value={u} className="font-mono text-[12px]">{u}</SelectItem>)}
+                {usageTypes.map((u) => <SelectItem key={u} value={u} className="font-mono text-[12px]">{t.usageTypes[u] ?? u}</SelectItem>)}
               </SelectContent>
             </Select>
           </Row>
-          <Row label={`Agent autonomy · ${autonomy.name}`}>
+          <Row label={`${t.generator.autonomy} · ${tAuton.name}`}>
             <div className="grid grid-cols-6 gap-1">
               {autonomyLevels.map((a) => (
                 <button key={a.level} type="button" onClick={() => setS({ ...s, autonomyLevel: a.level })}
@@ -81,39 +82,38 @@ export function GeneratorWorkspace() {
                   }`}>L{a.level}</button>
               ))}
             </div>
-            <p className="text-[12px] text-ink-3 mt-2 leading-relaxed">{autonomy.description}</p>
+            <p className="text-[12px] text-ink-3 mt-2 leading-relaxed">{tAuton.description}</p>
           </Row>
           <div className="grid gap-4 md:grid-cols-2">
-            <Row label="Initiative"><Input value={s.initiative} onChange={(e) => setS({ ...s, initiative: e.target.value })} className="had-input" /></Row>
-            <Row label="Delivery environment"><Input value={s.environment} onChange={(e) => setS({ ...s, environment: e.target.value })} className="had-input" /></Row>
+            <Row label={t.generator.initiative}><Input value={s.initiative} onChange={(e) => setS({ ...s, initiative: e.target.value })} className="had-input" /></Row>
+            <Row label={t.generator.environment}><Input value={s.environment} onChange={(e) => setS({ ...s, environment: e.target.value })} className="had-input" /></Row>
           </div>
-          <Row label="Business problem"><Textarea rows={2} value={s.problem} onChange={(e) => setS({ ...s, problem: e.target.value })} className="had-input rounded-none resize-none" /></Row>
+          <Row label={t.generator.problem}><Textarea rows={2} value={s.problem} onChange={(e) => setS({ ...s, problem: e.target.value })} className="had-input rounded-none resize-none" /></Row>
           <div className="grid gap-4 md:grid-cols-2">
-            <Row label="Target users"><Textarea rows={2} value={s.users} onChange={(e) => setS({ ...s, users: e.target.value })} className="had-input rounded-none resize-none" /></Row>
-            <Row label="Expected digital value"><Textarea rows={2} value={s.value} onChange={(e) => setS({ ...s, value: e.target.value })} className="had-input rounded-none resize-none" /></Row>
-            <Row label="Main risks"><Textarea rows={2} value={s.risks} onChange={(e) => setS({ ...s, risks: e.target.value })} className="had-input rounded-none resize-none" /></Row>
-            <Row label="Data sensitivity"><Textarea rows={2} value={s.dataSensitivity} onChange={(e) => setS({ ...s, dataSensitivity: e.target.value })} className="had-input rounded-none resize-none" /></Row>
-            <Row label="Required human approvals"><Textarea rows={2} value={s.approvals} onChange={(e) => setS({ ...s, approvals: e.target.value })} className="had-input rounded-none resize-none" /></Row>
-            <Row label="Tools involved"><Textarea rows={2} value={s.tools} onChange={(e) => setS({ ...s, tools: e.target.value })} className="had-input rounded-none resize-none" /></Row>
+            <Row label={t.generator.users}><Textarea rows={2} value={s.users} onChange={(e) => setS({ ...s, users: e.target.value })} className="had-input rounded-none resize-none" /></Row>
+            <Row label={t.generator.value}><Textarea rows={2} value={s.value} onChange={(e) => setS({ ...s, value: e.target.value })} className="had-input rounded-none resize-none" /></Row>
+            <Row label={t.generator.risks}><Textarea rows={2} value={s.risks} onChange={(e) => setS({ ...s, risks: e.target.value })} className="had-input rounded-none resize-none" /></Row>
+            <Row label={t.generator.data}><Textarea rows={2} value={s.dataSensitivity} onChange={(e) => setS({ ...s, dataSensitivity: e.target.value })} className="had-input rounded-none resize-none" /></Row>
+            <Row label={t.generator.approvals}><Textarea rows={2} value={s.approvals} onChange={(e) => setS({ ...s, approvals: e.target.value })} className="had-input rounded-none resize-none" /></Row>
+            <Row label={t.generator.toolsInvolved}><Textarea rows={2} value={s.tools} onChange={(e) => setS({ ...s, tools: e.target.value })} className="had-input rounded-none resize-none" /></Row>
           </div>
         </div>
       </div>
 
-      {/* Preview */}
       <div className="bg-surface flex flex-col">
         <div className="flex items-center justify-between px-7 md:px-9 pt-7 md:pt-9 pb-4 border-b had-hairline">
           <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink-3">{filename}</div>
           <div className="flex gap-1">
-            <Button onClick={onCopy} variant="ghost" size="sm" className="rounded-none font-mono text-[10px] uppercase tracking-[0.14em] hover:bg-surface-2"><Copy className="size-3.5 mr-1.5" />Copy</Button>
-            <Button onClick={onDownload} variant="ghost" size="sm" className="rounded-none font-mono text-[10px] uppercase tracking-[0.14em] hover:bg-surface-2"><Download className="size-3.5 mr-1.5" />Download</Button>
-            <Button onClick={onSave} variant="ghost" size="sm" className="rounded-none font-mono text-[10px] uppercase tracking-[0.14em] hover:bg-surface-2"><Save className="size-3.5 mr-1.5" />Save</Button>
-            <Button onClick={onReset} variant="ghost" size="sm" className="rounded-none font-mono text-[10px] uppercase tracking-[0.14em] hover:bg-surface-2 text-danger"><RefreshCw className="size-3.5 mr-1.5" />Reset</Button>
+            <Button onClick={onCopy} variant="ghost" size="sm" className="rounded-none font-mono text-[10px] uppercase tracking-[0.14em] hover:bg-surface-2"><Copy className="size-3.5 mr-1.5" />{t.generator.copy}</Button>
+            <Button onClick={onDownload} variant="ghost" size="sm" className="rounded-none font-mono text-[10px] uppercase tracking-[0.14em] hover:bg-surface-2"><Download className="size-3.5 mr-1.5" />{t.generator.download}</Button>
+            <Button onClick={onSave} variant="ghost" size="sm" className="rounded-none font-mono text-[10px] uppercase tracking-[0.14em] hover:bg-surface-2"><Save className="size-3.5 mr-1.5" />{t.generator.save}</Button>
+            <Button onClick={onReset} variant="ghost" size="sm" className="rounded-none font-mono text-[10px] uppercase tracking-[0.14em] hover:bg-surface-2 text-danger"><RefreshCw className="size-3.5 mr-1.5" />{t.generator.reset}</Button>
           </div>
         </div>
         <Tabs defaultValue="rendered" className="flex-1 flex flex-col">
           <TabsList className="rounded-none bg-transparent border-b had-hairline justify-start px-7 md:px-9 h-10">
-            <TabsTrigger value="rendered" className="rounded-none font-mono text-[11px] uppercase tracking-[0.14em] data-[state=active]:bg-transparent data-[state=active]:text-accent data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-accent"><Eye className="size-3.5 mr-1.5" />Rendered</TabsTrigger>
-            <TabsTrigger value="raw" className="rounded-none font-mono text-[11px] uppercase tracking-[0.14em] data-[state=active]:bg-transparent data-[state=active]:text-accent data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-accent"><FileCode className="size-3.5 mr-1.5" />Raw</TabsTrigger>
+            <TabsTrigger value="rendered" className="rounded-none font-mono text-[11px] uppercase tracking-[0.14em] data-[state=active]:bg-transparent data-[state=active]:text-accent data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-accent"><Eye className="size-3.5 mr-1.5" />{t.generator.rendered}</TabsTrigger>
+            <TabsTrigger value="raw" className="rounded-none font-mono text-[11px] uppercase tracking-[0.14em] data-[state=active]:bg-transparent data-[state=active]:text-accent data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-accent"><FileCode className="size-3.5 mr-1.5" />{t.generator.raw}</TabsTrigger>
           </TabsList>
           <TabsContent value="rendered" className="px-7 md:px-9 py-7 max-h-[800px] overflow-y-auto m-0">
             <article className="prose prose-invert max-w-none text-ink-2 prose-headings:text-ink prose-headings:font-display prose-headings:tracking-tight prose-strong:text-ink prose-code:text-accent prose-a:text-accent">

@@ -1,11 +1,13 @@
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Seo } from "@/components/Seo";
 import { ToolkitsSection } from "@/components/sections/ToolkitsSection";
+import { useT } from "@/i18n/I18nProvider";
 
 export default function ToolkitsPage() {
+  const t = useT();
   return (
     <AppLayout>
-      <Seo title="AI Toolkits — HAD Method" description="Download tool-specific instructions for Claude, OpenAI, Gemini, Lovable, Cursor, GitHub Copilot, Windsurf, Replit and n8n." />
+      <Seo title={t.meta.toolkitsTitle} description={t.meta.toolkitsDesc} />
       <ToolkitsSection />
     </AppLayout>
   );
