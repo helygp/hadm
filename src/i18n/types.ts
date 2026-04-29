@@ -1,4 +1,4 @@
-export type Lang = "pt" | "es";
+export type Lang = "pt" | "es" | "en";
 
 export interface LoopStepT { name: string; blurb: string; detail: string }
 export interface PrincipleT { title: string; description: string }

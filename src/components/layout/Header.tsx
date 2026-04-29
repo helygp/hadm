@@ -92,6 +92,13 @@ export function Header() {
             className="hidden sm:inline-flex border had-hairline-2 rounded-full overflow-hidden font-mono text-[10px] tracking-[0.14em]"
           >
             <button
+              onClick={() => setLang("en")}
+              className={`px-2.5 h-9 transition-colors ${lang === "en" ? "bg-ink text-background" : "text-ink-2 hover:text-ink"}`}
+              aria-pressed={lang === "en"}
+            >
+              EN
+            </button>
+            <button
               onClick={() => setLang("pt")}
               className={`px-2.5 h-9 transition-colors ${lang === "pt" ? "bg-ink text-background" : "text-ink-2 hover:text-ink"}`}
               aria-pressed={lang === "pt"}
@@ -131,6 +138,7 @@ export function Header() {
             <SheetContent side="right" className="bg-background border-l had-hairline-2 w-[88vw] max-w-[360px]">
               <div className="flex flex-col gap-1 mt-8">
                 <div className="sm:hidden inline-flex border had-hairline-2 rounded-full overflow-hidden font-mono text-[10px] tracking-[0.14em] mb-3 self-start">
+                  <button onClick={() => setLang("en")} className={`px-3 h-8 ${lang === "en" ? "bg-ink text-background" : "text-ink-2"}`}>EN</button>
                   <button onClick={() => setLang("pt")} className={`px-3 h-8 ${lang === "pt" ? "bg-ink text-background" : "text-ink-2"}`}>PT</button>
                   <button onClick={() => setLang("es")} className={`px-3 h-8 ${lang === "es" ? "bg-ink text-background" : "text-ink-2"}`}>ES</button>
                 </div>
