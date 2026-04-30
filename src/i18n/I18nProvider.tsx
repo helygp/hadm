@@ -1,12 +1,10 @@
-import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
+import { useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 import { pt } from "./pt";
 import { es } from "./es";
 import { en } from "./en";
 import type { Dict, Lang } from "./types";
+import { I18nCtx, type I18nCtxValue } from "./context";
 
-interface Ctx { lang: Lang; setLang: (l: Lang) => void; t: Dict; }
-
-const I18nCtx = createContext<Ctx | null>(null);
 const KEY = "had:lang";
 
 function detect(): Lang {
@@ -33,7 +31,7 @@ export function I18nProvider({ children }: { children: ReactNode }) {
     try { localStorage.setItem(KEY, lang); } catch { /* noop */ }
     document.documentElement.lang = lang;
   }, [lang]);
-  const value = useMemo<Ctx>(() => ({
+  const value = useMemo<I18nCtxValue>(() => ({
     lang,
     setLang: (l) => setLangState(l),
     t: DICTS[lang],
@@ -41,7 +39,7 @@ export function I18nProvider({ children }: { children: ReactNode }) {
   return <I18nCtx.Provider value={value}>{children}</I18nCtx.Provider>;
 }
 
-export function useI18n(): Ctx {
+export function useI18n(): I18nCtxValue {
   const ctx = useContext(I18nCtx);
   if (!ctx) throw new Error("useI18n must be used within I18nProvider");
   return ctx;
