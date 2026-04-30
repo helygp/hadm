@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { Copy, Download, RefreshCw, Save, FileCode, Eye, ArrowRight, ArrowLeft, Sparkles, Check, AlertCircle } from "lucide-react";
+import { Copy, Download, RefreshCw, Save, FileCode, Eye, ArrowRight, ArrowLeft, Sparkles, Check, AlertCircle, Info } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { toolkits } from "@/data/toolkits";
@@ -14,6 +14,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { useToast } from "@/hooks/use-toast";
 import { useT } from "@/i18n/I18nProvider";
 
@@ -90,6 +91,7 @@ export function GeneratorWorkspace() {
     true;
 
   return (
+    <TooltipProvider delayDuration={150}>
     <div className="border had-hairline-2 bg-surface">
       {/* Stepper */}
       <div className="grid grid-cols-4 border-b had-hairline">
@@ -175,29 +177,29 @@ export function GeneratorWorkspace() {
             )}
 
             <div className="mt-8 grid gap-5 md:grid-cols-2">
-              <FieldRow label={t.generator.initiative} af={s.autoFilled.initiative} required>
-                <Input value={s.initiative} onChange={(e) => setS({ ...s, initiative: e.target.value, autoFilled: { ...s.autoFilled, initiative: false } })} className="had-input" />
+              <FieldRow label={t.generator.initiative} af={s.autoFilled.initiative} hint={t.generator.hints.initiative} required>
+                <Input value={s.initiative} placeholder={t.generator.placeholders.initiative} onChange={(e) => setS({ ...s, initiative: e.target.value, autoFilled: { ...s.autoFilled, initiative: false } })} className="had-input" />
               </FieldRow>
-              <FieldRow label={t.generator.environment} af={s.autoFilled.environment}>
-                <Input value={s.environment} onChange={(e) => setS({ ...s, environment: e.target.value, autoFilled: { ...s.autoFilled, environment: false } })} className="had-input" />
+              <FieldRow label={t.generator.environment} af={s.autoFilled.environment} hint={t.generator.hints.environment}>
+                <Input value={s.environment} placeholder={t.generator.placeholders.environment} onChange={(e) => setS({ ...s, environment: e.target.value, autoFilled: { ...s.autoFilled, environment: false } })} className="had-input" />
               </FieldRow>
-              <FieldRow label={t.generator.problem} af={s.autoFilled.problem} className="md:col-span-2">
-                <Textarea rows={2} value={s.problem} onChange={(e) => setS({ ...s, problem: e.target.value, autoFilled: { ...s.autoFilled, problem: false } })} className="had-input rounded-none resize-none" />
+              <FieldRow label={t.generator.problem} af={s.autoFilled.problem} hint={t.generator.hints.problem} className="md:col-span-2">
+                <Textarea rows={2} value={s.problem} placeholder={t.generator.placeholders.problem} onChange={(e) => setS({ ...s, problem: e.target.value, autoFilled: { ...s.autoFilled, problem: false } })} className="had-input rounded-none resize-none" />
               </FieldRow>
-              <FieldRow label={t.generator.users} af={s.autoFilled.users}>
-                <Textarea rows={2} value={s.users} onChange={(e) => setS({ ...s, users: e.target.value, autoFilled: { ...s.autoFilled, users: false } })} className="had-input rounded-none resize-none" />
+              <FieldRow label={t.generator.users} af={s.autoFilled.users} hint={t.generator.hints.users}>
+                <Textarea rows={2} value={s.users} placeholder={t.generator.placeholders.users} onChange={(e) => setS({ ...s, users: e.target.value, autoFilled: { ...s.autoFilled, users: false } })} className="had-input rounded-none resize-none" />
               </FieldRow>
-              <FieldRow label={t.generator.value} af={s.autoFilled.value}>
-                <Textarea rows={2} value={s.value} onChange={(e) => setS({ ...s, value: e.target.value, autoFilled: { ...s.autoFilled, value: false } })} className="had-input rounded-none resize-none" />
+              <FieldRow label={t.generator.value} af={s.autoFilled.value} hint={t.generator.hints.value}>
+                <Textarea rows={2} value={s.value} placeholder={t.generator.placeholders.value} onChange={(e) => setS({ ...s, value: e.target.value, autoFilled: { ...s.autoFilled, value: false } })} className="had-input rounded-none resize-none" />
               </FieldRow>
-              <FieldRow label={t.generator.risks} af={s.autoFilled.risks}>
-                <Textarea rows={2} value={s.risks} onChange={(e) => setS({ ...s, risks: e.target.value, autoFilled: { ...s.autoFilled, risks: false } })} className="had-input rounded-none resize-none" />
+              <FieldRow label={t.generator.risks} af={s.autoFilled.risks} hint={t.generator.hints.risks}>
+                <Textarea rows={2} value={s.risks} placeholder={t.generator.placeholders.risks} onChange={(e) => setS({ ...s, risks: e.target.value, autoFilled: { ...s.autoFilled, risks: false } })} className="had-input rounded-none resize-none" />
               </FieldRow>
-              <FieldRow label={t.generator.data} af={s.autoFilled.dataSensitivity}>
-                <Textarea rows={2} value={s.dataSensitivity} onChange={(e) => setS({ ...s, dataSensitivity: e.target.value, autoFilled: { ...s.autoFilled, dataSensitivity: false } })} className="had-input rounded-none resize-none" />
+              <FieldRow label={t.generator.data} af={s.autoFilled.dataSensitivity} hint={t.generator.hints.data}>
+                <Textarea rows={2} value={s.dataSensitivity} placeholder={t.generator.placeholders.data} onChange={(e) => setS({ ...s, dataSensitivity: e.target.value, autoFilled: { ...s.autoFilled, dataSensitivity: false } })} className="had-input rounded-none resize-none" />
               </FieldRow>
-              <FieldRow label={t.generator.approvals} af={s.autoFilled.approvals}>
-                <Textarea rows={2} value={s.approvals} onChange={(e) => setS({ ...s, approvals: e.target.value, autoFilled: { ...s.autoFilled, approvals: false } })} className="had-input rounded-none resize-none" />
+              <FieldRow label={t.generator.approvals} af={s.autoFilled.approvals} hint={t.generator.hints.approvals}>
+                <Textarea rows={2} value={s.approvals} placeholder={t.generator.placeholders.approvals} onChange={(e) => setS({ ...s, approvals: e.target.value, autoFilled: { ...s.autoFilled, approvals: false } })} className="had-input rounded-none resize-none" />
               </FieldRow>
             </div>
           </div>
@@ -250,8 +252,8 @@ export function GeneratorWorkspace() {
                 </div>
                 <p className="text-[12px] text-ink-3 mt-2 leading-relaxed">{tAuton.description}</p>
               </div>
-              <FieldRow label={t.generator.toolsInvolved} af={s.autoFilled.tools} className="md:col-span-2">
-                <Textarea rows={2} value={s.tools} onChange={(e) => setS({ ...s, tools: e.target.value, autoFilled: { ...s.autoFilled, tools: false } })} className="had-input rounded-none resize-none" />
+              <FieldRow label={t.generator.toolsInvolved} af={s.autoFilled.tools} hint={t.generator.hints.tools} className="md:col-span-2">
+                <Textarea rows={2} value={s.tools} placeholder={t.generator.placeholders.tools} onChange={(e) => setS({ ...s, tools: e.target.value, autoFilled: { ...s.autoFilled, tools: false } })} className="had-input rounded-none resize-none" />
               </FieldRow>
             </div>
           </div>
@@ -322,16 +324,29 @@ export function GeneratorWorkspace() {
         </div>
       </div>
     </div>
+    </TooltipProvider>
   );
 }
 
-function FieldRow({ label, children, af, required, className = "" }: { label: string; children: React.ReactNode; af?: boolean; required?: boolean; className?: string }) {
+function FieldRow({ label, children, af, required, hint, className = "" }: { label: string; children: React.ReactNode; af?: boolean; required?: boolean; hint?: string; className?: string }) {
   return (
     <div className={`flex flex-col gap-2 ${className}`}>
       <div className="flex items-center gap-2">
         <Label className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink-3">
           {label}{required && <span className="text-danger ml-1">*</span>}
         </Label>
+        {hint && (
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <button type="button" aria-label="info" className="text-ink-3 hover:text-accent transition-colors">
+                <Info className="size-3" />
+              </button>
+            </TooltipTrigger>
+            <TooltipContent side="top" className="max-w-xs rounded-none border had-hairline-2 bg-surface text-ink-2 text-[12px] leading-relaxed">
+              {hint}
+            </TooltipContent>
+          </Tooltip>
+        )}
         {af && (
           <span className="font-mono text-[9px] uppercase tracking-[0.14em] px-1.5 py-0.5 border had-hairline-2 text-accent flex items-center gap-1">
             <Sparkles className="size-2.5" />HAD
