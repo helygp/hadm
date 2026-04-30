@@ -72,6 +72,17 @@ export interface Dict {
     users: string; value: string; risks: string; data: string; approvals: string; toolsInvolved: string;
     rendered: string; raw: string; copy: string; download: string; save: string; reset: string;
     genericTool: string;
+    // guided journey
+    steps: { tell: string; interpret: string; choose: string; review: string };
+    stepHints: { tell: string; interpret: string; choose: string; review: string };
+    tellTitle: string; tellLede: string; tellPlaceholder: string; tellMin: string;
+    interpretTitle: string; interpretLede: string; interpretedFrom: string;
+    chooseTitle: string; chooseLede: string;
+    reviewTitle: string; reviewLede: string;
+    next: string; back: string; startOver: string;
+    autoFilled: string; pleaseFill: string;
+    suggestions: string; useSuggestion: string;
+    detectedIntent: string; missingInfo: string; allGood: string;
   };
   usageTypes: Record<string, string>;
   footer: { tagA: string; tagB: string; tagC: string; tagD: string; intro: string; methodCol: string; resourcesCol: string; communityCol: string; copy: string; built: string; whyHad: string; loop: string; faq: string; artifactLib: string; aiTools: string; instr: string; applyFounding: string; suggestCase: string; contribute: string };
