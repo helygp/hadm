@@ -324,10 +324,11 @@ export function GeneratorWorkspace() {
         </div>
       </div>
     </div>
+    </TooltipProvider>
   );
 }
 
-function FieldRow({ label, children, af, required, className = "" }: { label: string; children: React.ReactNode; af?: boolean; required?: boolean; className?: string }) {
+function FieldRow({ label, children, af, required, hint, className = "" }: { label: string; children: React.ReactNode; af?: boolean; required?: boolean; hint?: string; className?: string }) {
   return (
     <div className={`flex flex-col gap-2 ${className}`}>
       <div className="flex items-center gap-2">
