@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { Copy, Download, RefreshCw, Save, FileCode, Eye, ArrowRight, ArrowLeft, Sparkles, Check, AlertCircle } from "lucide-react";
+import { Copy, Download, RefreshCw, Save, FileCode, Eye, ArrowRight, ArrowLeft, Sparkles, Check, AlertCircle, Info } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { toolkits } from "@/data/toolkits";
@@ -14,6 +14,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { useToast } from "@/hooks/use-toast";
 import { useT } from "@/i18n/I18nProvider";
 
