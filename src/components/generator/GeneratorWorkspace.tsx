@@ -335,6 +335,18 @@ function FieldRow({ label, children, af, required, hint, className = "" }: { lab
         <Label className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink-3">
           {label}{required && <span className="text-danger ml-1">*</span>}
         </Label>
+        {hint && (
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <button type="button" aria-label="info" className="text-ink-3 hover:text-accent transition-colors">
+                <Info className="size-3" />
+              </button>
+            </TooltipTrigger>
+            <TooltipContent side="top" className="max-w-xs rounded-none border had-hairline-2 bg-surface text-ink-2 text-[12px] leading-relaxed">
+              {hint}
+            </TooltipContent>
+          </Tooltip>
+        )}
         {af && (
           <span className="font-mono text-[9px] uppercase tracking-[0.14em] px-1.5 py-0.5 border had-hairline-2 text-accent flex items-center gap-1">
             <Sparkles className="size-2.5" />HAD
