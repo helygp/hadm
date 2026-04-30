@@ -83,6 +83,8 @@ export interface Dict {
     autoFilled: string; pleaseFill: string;
     suggestions: string; useSuggestion: string;
     detectedIntent: string; missingInfo: string; allGood: string;
+    hints: Record<string, string>;
+    placeholders: Record<string, string>;
   };
   usageTypes: Record<string, string>;
   footer: { tagA: string; tagB: string; tagC: string; tagD: string; intro: string; methodCol: string; resourcesCol: string; communityCol: string; copy: string; built: string; whyHad: string; loop: string; faq: string; artifactLib: string; aiTools: string; instr: string; applyFounding: string; suggestCase: string; contribute: string };
