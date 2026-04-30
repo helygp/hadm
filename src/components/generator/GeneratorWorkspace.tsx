@@ -91,6 +91,7 @@ export function GeneratorWorkspace() {
     true;
 
   return (
+    <TooltipProvider delayDuration={150}>
     <div className="border had-hairline-2 bg-surface">
       {/* Stepper */}
       <div className="grid grid-cols-4 border-b had-hairline">
