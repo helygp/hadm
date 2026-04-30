@@ -252,8 +252,8 @@ export function GeneratorWorkspace() {
                 </div>
                 <p className="text-[12px] text-ink-3 mt-2 leading-relaxed">{tAuton.description}</p>
               </div>
-              <FieldRow label={t.generator.toolsInvolved} af={s.autoFilled.tools} className="md:col-span-2">
-                <Textarea rows={2} value={s.tools} onChange={(e) => setS({ ...s, tools: e.target.value, autoFilled: { ...s.autoFilled, tools: false } })} className="had-input rounded-none resize-none" />
+              <FieldRow label={t.generator.toolsInvolved} af={s.autoFilled.tools} hint={t.generator.hints.tools} className="md:col-span-2">
+                <Textarea rows={2} value={s.tools} placeholder={t.generator.placeholders.tools} onChange={(e) => setS({ ...s, tools: e.target.value, autoFilled: { ...s.autoFilled, tools: false } })} className="had-input rounded-none resize-none" />
               </FieldRow>
             </div>
           </div>
