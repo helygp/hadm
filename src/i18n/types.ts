@@ -26,7 +26,7 @@ export interface Dict {
     caseTitle: string;
     caseDesc: string;
   };
-  nav: { method: string; loop: string; artifacts: string; toolkits: string; community: string; cases: string; faq: string; generator: string; allToolkits: string; library: string };
+  nav: { howItWorks: string; method: string; loop: string; artifacts: string; toolkits: string; community: string; cases: string; faq: string; generator: string; allToolkits: string; library: string };
   header: { starterKit: string; toggleTheme: string; openMenu: string; downloadStarterKit: string; lang: string };
   toasts: { building: string; ready: string; readyDesc: string; failed: string; downloaded: string; copied: string; copyFailed: string; saved: string; submitting: string; required: string };
   hero: {
@@ -36,6 +36,7 @@ export interface Dict {
     titleB: string;
     lede: string;
     pillars: { humans: string; agents: string; ai: string; value: string };
+    requestAccess: string;
     download: string;
     configure: string;
     join: string;
@@ -43,6 +44,17 @@ export interface Dict {
     statArtifacts: string;
     statToolkits: string;
   };
+  accessRequest: {
+    title: string; description: string; email: string; emailPlaceholder: string;
+    submit: string; submitting: string; success: string; successBody: string;
+    invalidEmail: string; duplicate: string; failed: string;
+  };
+  howItWorks: {
+    num: string; label: string; status: string; title: string; lede: string;
+    steps: { send: { title: string; description: string }; decide: { title: string; description: string }; act: { title: string; description: string } };
+    requestAccess: string;
+  };
+  autonomySection: { num: string; label: string; title: string; lede: string; level: string; boundary: string };
   whyHad: {
     num: string; label: string; title: string; lede: string;
     agileTitle: string; agileKicker: string; agile: string[];

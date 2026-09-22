@@ -19,6 +19,7 @@ export function Header() {
   const { toast } = useToast();
 
   const navLinks = [
+    { id: "how-it-works", label: t.nav.howItWorks },
     { id: "method", label: t.nav.method },
     { id: "loop", label: t.nav.loop },
     { id: "artifacts", label: t.nav.artifacts },
@@ -64,12 +65,12 @@ export function Header() {
           <span className="text-ink font-semibold">HAD</span>
           <span className="text-ink-3 hidden sm:inline">Method</span>
         </Link>
-        <nav className="hidden lg:flex items-center justify-center gap-6">
+        <nav className="hidden lg:flex items-center justify-center gap-4 xl:gap-6">
           {navLinks.map((l) => (
             <a
               key={l.id}
               href={linkHref(l.id)}
-              className="font-mono text-[11px] uppercase tracking-[0.12em] text-ink-2 hover:text-ink transition-colors py-2"
+              className="whitespace-nowrap font-mono text-[11px] uppercase tracking-[0.12em] text-ink-2 hover:text-ink transition-colors py-2"
             >
               {l.label}
             </a>

@@ -1,6 +1,8 @@
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Seo } from "@/components/Seo";
 import { HeroSection } from "@/components/sections/HeroSection";
+import { HowItWorksSection } from "@/components/sections/HowItWorksSection";
+import { AutonomyLevelsSection } from "@/components/sections/AutonomyLevelsSection";
 import { WhyHadSection } from "@/components/sections/WhyHadSection";
 import { DefinitionSection } from "@/components/sections/DefinitionSection";
 import { OperatingLoopSection } from "@/components/sections/OperatingLoopSection";
@@ -19,6 +21,8 @@ const Index = () => {
       <Seo title={t.meta.siteTitle} description={t.meta.siteDesc} />
       <h1 className="sr-only">{t.meta.siteTitle}</h1>
       <HeroSection />
+      <HowItWorksSection />
+      <AutonomyLevelsSection />
       <WhyHadSection />
       <DefinitionSection />
       <OperatingLoopSection />
