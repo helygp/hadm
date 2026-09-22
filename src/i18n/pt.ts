@@ -3,7 +3,7 @@ import type { Dict } from "./types";
 export const pt: Dict = {
   meta: {
     siteTitle: "HAD Method — Entrega Agêntica Governada por Humanos",
-    siteDesc: "Um método aberto para entregar valor digital com agentes de IA sob governança humana. Baixe o Starter Kit, configure suas ferramentas e participe da comunidade fundadora.",
+    siteDesc: "Um protocolo aberto para decisões tipadas de autonomia: prosseguir, escalar ou negar sob governança humana explícita.",
     artifactsTitle: "Biblioteca de Artefatos — HAD Method",
     artifactsDesc: "Navegue, visualize e baixe todos os artefatos do HAD Method: manifesto, canvas, prompts, agentes, checklists e templates.",
     toolkitsTitle: "Toolkits de IA — HAD Method",

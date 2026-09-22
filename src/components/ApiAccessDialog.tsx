@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/dialog";
 import { useI18n, useT } from "@/i18n/I18nProvider";
 import { requestApiAccess } from "@/lib/apiAccess";
+import { useToast } from "@/hooks/use-toast";
 
 interface ApiAccessDialogProps {
   open: boolean;
@@ -20,6 +21,7 @@ interface ApiAccessDialogProps {
 export function ApiAccessDialog({ open, onOpenChange }: ApiAccessDialogProps) {
   const t = useT();
   const { lang } = useI18n();
+  const { toast } = useToast();
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
@@ -47,6 +49,7 @@ export function ApiAccessDialog({ open, onOpenChange }: ApiAccessDialogProps) {
     setSubmitting(false);
     if (result.ok) {
       setSuccess(true);
+      toast({ title: t.accessRequest.success, description: t.accessRequest.successBody });
       return;
     }
     setError(result.reason === "duplicate" ? t.accessRequest.duplicate : t.accessRequest.failed);
