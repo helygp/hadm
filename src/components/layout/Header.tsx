@@ -18,15 +18,18 @@ export function Header() {
   const [open, setOpen] = useState(false);
   const { toast } = useToast();
 
+  const homeHref = (id: string) => (pathname === "/" ? `#${id}` : `/#${id}`);
+  const methodHref = (id: string) => (pathname === "/method" ? `#${id}` : `/method#${id}`);
   const navLinks = [
-    { id: "how-it-works", label: t.nav.howItWorks },
-    { id: "method", label: t.nav.method },
-    { id: "loop", label: t.nav.loop },
-    { id: "artifacts", label: t.nav.artifacts },
-    { id: "toolkits", label: t.nav.toolkits },
-    { id: "community", label: t.nav.community },
-    { id: "cases", label: t.nav.cases },
-    { id: "faq", label: t.nav.faq },
+    { href: homeHref("how-it-works"), label: t.nav.howItWorks },
+    { href: homeHref("autonomy"), label: t.nav.autonomy },
+    { href: "/method", label: t.nav.method },
+    { href: methodHref("loop"), label: t.nav.loop },
+    { href: "/artifacts", label: t.nav.artifacts },
+    { href: "/toolkits", label: t.nav.toolkits },
+    { href: "/community", label: t.nav.community },
+    { href: methodHref("cases"), label: t.nav.cases },
+    { href: methodHref("faq"), label: t.nav.faq },
   ];
 
   useEffect(() => {
@@ -45,8 +48,6 @@ export function Header() {
       toast({ title: t.toasts.failed, variant: "destructive" });
     }
   };
-
-  const linkHref = (id: string) => (pathname === "/" ? `#${id}` : `/#${id}`);
 
   return (
     <header
@@ -68,8 +69,8 @@ export function Header() {
         <nav className="hidden lg:flex items-center justify-center gap-4 xl:gap-6">
           {navLinks.map((l) => (
             <a
-              key={l.id}
-              href={linkHref(l.id)}
+              key={l.href + l.label}
+              href={l.href}
               className="whitespace-nowrap font-mono text-[11px] uppercase tracking-[0.12em] text-ink-2 hover:text-ink transition-colors py-2"
             >
               {l.label}
@@ -145,8 +146,8 @@ export function Header() {
                 </div>
                 {navLinks.map((l) => (
                   <a
-                    key={l.id}
-                    href={linkHref(l.id)}
+                    key={l.href + l.label}
+                    href={l.href}
                     onClick={() => setOpen(false)}
                     className="font-mono text-[12px] uppercase tracking-[0.14em] text-ink-2 hover:text-ink py-3 border-b had-hairline"
                   >
@@ -159,20 +160,6 @@ export function Header() {
                   className="font-mono text-[12px] uppercase tracking-[0.14em] text-accent py-3 border-b had-hairline"
                 >
                   {t.nav.generator}
-                </NavLink>
-                <NavLink
-                  to="/toolkits"
-                  onClick={() => setOpen(false)}
-                  className="font-mono text-[12px] uppercase tracking-[0.14em] text-ink-2 hover:text-ink py-3 border-b had-hairline"
-                >
-                  {t.nav.allToolkits}
-                </NavLink>
-                <NavLink
-                  to="/artifacts"
-                  onClick={() => setOpen(false)}
-                  className="font-mono text-[12px] uppercase tracking-[0.14em] text-ink-2 hover:text-ink py-3 border-b had-hairline"
-                >
-                  {t.nav.library}
                 </NavLink>
                 <Button
                   onClick={() => { setOpen(false); handleDownloadKit(); }}

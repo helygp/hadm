@@ -14,6 +14,7 @@ import GeneratorPage from "./pages/GeneratorPage";
 import CommunityPage from "./pages/CommunityPage";
 import CaseSubmitPage from "./pages/CaseSubmitPage";
 import ContributePage from "./pages/ContributePage";
+import MethodPage from "./pages/MethodPage";
 
 const queryClient = new QueryClient();
 
@@ -27,6 +28,7 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/method" element={<MethodPage />} />
             <Route path="/artifacts" element={<ArtifactsPage />} />
             <Route path="/toolkits" element={<ToolkitsPage />} />
             <Route path="/toolkits/:toolId" element={<ToolkitDetailPage />} />
