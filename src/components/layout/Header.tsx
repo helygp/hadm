@@ -19,6 +19,7 @@ export function Header() {
   const { toast } = useToast();
 
   const navLinks = [
+    { id: "how-it-works", label: t.nav.howItWorks },
     { id: "method", label: t.nav.method },
     { id: "loop", label: t.nav.loop },
     { id: "artifacts", label: t.nav.artifacts },

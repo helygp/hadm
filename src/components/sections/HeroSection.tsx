@@ -1,12 +1,15 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
 import { ArrowRight, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ApiAccessDialog } from "@/components/ApiAccessDialog";
 import { Orbital } from "@/components/visuals/Orbital";
 import { downloadStarterKit } from "@/lib/starterKitZip";
 import { useToast } from "@/hooks/use-toast";
 import { useT } from "@/i18n/I18nProvider";
 
 export function HeroSection() {
+  const [accessOpen, setAccessOpen] = useState(false);
   const { toast } = useToast();
   const t = useT();
   const onDownload = async () => {
@@ -38,19 +41,19 @@ export function HeroSection() {
             </div>
             <div className="mt-9 flex flex-wrap gap-3 items-center">
               <Button
-                onClick={onDownload}
+                onClick={() => setAccessOpen(true)}
                 className="rounded-none h-12 px-6 bg-accent text-accent-foreground hover:bg-ink hover:text-background font-mono text-[12px] uppercase tracking-[0.12em]"
               >
+                {t.hero.requestAccess} <ArrowRight className="size-4 ml-2" />
+              </Button>
+              <Button onClick={onDownload} variant="outline" className="rounded-none h-12 px-6 border had-hairline-2 hover:border-ink font-mono text-[12px] uppercase tracking-[0.12em] bg-transparent">
                 <Download className="size-4 mr-2" /> {t.hero.download}
               </Button>
-              <Button asChild variant="outline" className="rounded-none h-12 px-6 border had-hairline-2 hover:border-ink font-mono text-[12px] uppercase tracking-[0.12em] bg-transparent">
-                <Link to="/generator">{t.hero.configure} <ArrowRight className="size-4 ml-2" /></Link>
-              </Button>
               <Link
-                to="/community"
+                to="/generator"
                 className="font-mono text-[11px] uppercase tracking-[0.14em] text-ink-2 hover:text-ink py-3 inline-flex items-center gap-2"
               >
-                {t.hero.join} <ArrowRight className="size-3.5" />
+                {t.hero.configure} <ArrowRight className="size-3.5" />
               </Link>
             </div>
             <div className="mt-16 grid grid-cols-3 border-t had-hairline">
@@ -64,6 +67,7 @@ export function HeroSection() {
           </div>
         </div>
       </div>
+      <ApiAccessDialog open={accessOpen} onOpenChange={setAccessOpen} />
     </section>
   );
 }
