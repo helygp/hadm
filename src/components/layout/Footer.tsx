@@ -19,9 +19,9 @@ export function Footer() {
           <p className="text-ink-3 text-sm mt-4 max-w-md">{t.footer.intro}</p>
         </div>
         <FooterCol title={t.footer.methodCol} links={[
-          { to: "/#method", label: t.footer.whyHad },
-          { to: "/#loop", label: t.footer.loop },
-          { to: "/#faq", label: t.footer.faq },
+          { to: "/#why-had", label: t.footer.whyHad },
+          { to: "/method#loop", label: t.footer.loop },
+          { to: "/method#faq", label: t.footer.faq },
         ]} />
         <FooterCol title={t.footer.resourcesCol} links={[
           { to: "/artifacts", label: t.footer.artifactLib },

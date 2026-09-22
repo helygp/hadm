@@ -4,6 +4,8 @@ export const es: Dict = {
   meta: {
     siteTitle: "HAD Method — Entrega Agéntica Gobernada por Humanos",
     siteDesc: "Un protocolo abierto para decisiones de autonomía tipadas: continuar, escalar o denegar bajo gobernanza humana explícita.",
+    methodTitle: "Referencia del Método — HAD Method",
+    methodDesc: "La referencia completa del HAD Method: definición, ciclo operativo, casos de uso y FAQ.",
     artifactsTitle: "Biblioteca de Artefactos — HAD Method",
     artifactsDesc: "Explora, previsualiza y descarga todos los artefactos del HAD Method: manifiesto, canvas, prompts, agentes, checklists y plantillas.",
     toolkitsTitle: "Kits de IA — HAD Method",
@@ -17,7 +19,7 @@ export const es: Dict = {
     caseTitle: "Sugerir un Caso de Uso — HAD Method",
     caseDesc: "Envía un caso de uso donde el HAD Method aplica.",
   },
-  nav: { howItWorks: "Cómo funciona", method: "Método", loop: "Ciclo", artifacts: "Artefactos", toolkits: "Kits", community: "Comunidad", cases: "Casos", faq: "FAQ", generator: "Generador", allToolkits: "Todos los Kits", library: "Biblioteca de Artefactos" },
+  nav: { howItWorks: "Cómo funciona", autonomy: "Autonomía", method: "Método", loop: "Ciclo", artifacts: "Artefactos", toolkits: "Kits", community: "Comunidad", cases: "Casos", faq: "FAQ", generator: "Generador", allToolkits: "Todos los Kits", library: "Biblioteca de Artefactos" },
   header: { starterKit: "Starter Kit", toggleTheme: "Cambiar tema", openMenu: "Abrir menú", downloadStarterKit: "Descargar Starter Kit", lang: "Idioma" },
   toasts: { building: "Generando Starter Kit…", ready: "Starter Kit listo", readyDesc: "HAD-Starter-Kit.zip descargado.", failed: "Falló la descarga", downloaded: "Descargado", copied: "Copiado", copyFailed: "Falló la copia", saved: "Guardado en el Starter Kit", submitting: "Enviando…", required: "Faltan campos obligatorios" },
   hero: {
@@ -51,6 +53,26 @@ export const es: Dict = {
     }, requestAccess: "Solicitar acceso anticipado",
   },
   autonomySection: { num: "P02", label: "Niveles de autonomía", title: "Autonomía que tu sistema puede nombrar.", lede: "Cada decisión está vinculada a uno de estos niveles. No es una sensación. Es un campo en la respuesta.", level: "Nivel", boundary: "Límite de ejecución" },
+  homeWhy: {
+    num: "P03", label: "Por qué HAD", title: "Las decisiones ahora necesitan protocolo.",
+    lede: "Cuando los agentes ejecutan el trabajo, la gobernanza no puede vivir solo en reuniones. HAD hace explícitos intención, riesgo, autonomía y evidencia antes de que ocurra la acción.",
+    points: [
+      "La autonomía se vuelve una decisión tipada, no una norma implícita del equipo.",
+      "Los humanos siguen a cargo de la intención, los límites y la aceptación del riesgo.",
+      "Los agentes avanzan más rápido porque el sistema sabe cuándo continuar, escalar o denegar.",
+    ],
+  },
+  getStarted: {
+    num: "P04", label: "Empieza", title: "Empieza con instrucciones. Avanza hacia el gate.",
+    lede: "Usa HAD hoy como instrucciones para herramientas, o solicita acceso anticipado a la capa de protocolo para decisiones de agentes.",
+    useTitle: "Úsalo ahora", useBody: "Genera un archivo Markdown específico para Claude, ChatGPT, Gemini, Lovable, Cursor, Copilot, Windsurf, Replit, n8n o un agente genérico.", useButton: "Abrir generador",
+    apiTitle: "Acceso a la API", apiBody: "Únete a la lista de acceso anticipado de HAD Gate y prueba decisiones de autonomía tipadas cuando el protocolo se abra.", apiButton: "Solicitar acceso a la API",
+  },
+  methodReference: {
+    eyebrow: "HAD Method · Referencia completa",
+    title: "El modelo operativo detrás del protocolo.",
+    lede: "Una referencia completa sobre cómo HAD define gobernanza humana, entrega agéntica, niveles de autonomía, ciclos operativos, casos de uso y preguntas prácticas de adopción.",
+  },
   whyHad: {
     num: "01", label: "Por qué HAD",
     title: "Agile organizó humanos. HAD organiza inteligencia.",
@@ -138,7 +160,7 @@ export const es: Dict = {
   },
   faqSection: { num: "07", label: "FAQ", title: "Preguntas, respondidas con claridad.", lede: "Qué es HAD, qué no es y cómo empezar a usarlo con tus herramientas hoy." },
   faqs: [
-    { q: "¿HAD Method reemplaza a Agile?", a: "No. HAD extiende el pensamiento de entrega para un mundo donde los agentes de IA participan en concepción, producción y evolución." },
+    { q: "¿HAD Method reemplaza a Agile?", a: "No. HAD no intenta ganar el debate de que ‘Agile murió’. Cambia cómo se toman decisiones cuando quien ejecuta es un agente, no una persona: la autonomía pasa a ser un valor tipado por decisión, no una norma implícita dentro de una ceremonia." },
     { q: "¿Solo sirve para desarrollo de software?", a: "No. HAD se aplica a productos digitales, automatización, portales de servicio, workflows de IA, herramientas internas, plataformas enterprise e iniciativas de transformación." },
     { q: "¿HAD elimina humanos de la entrega?", a: "No. HAD reposiciona a los humanos hacia gobernanza, responsabilidad, validación de valor y decisiones estratégicas." },
     { q: "¿Los agentes pueden realmente concebir productos?", a: "Los agentes pueden investigar, sintetizar, generar hipótesis, mapear journeys, proponer soluciones y crear artefactos. Los humanos deben definir límites y aprobar decisiones críticas." },

@@ -13,6 +13,8 @@ export interface Dict {
   meta: {
     siteTitle: string;
     siteDesc: string;
+    methodTitle: string;
+    methodDesc: string;
     artifactsTitle: string;
     artifactsDesc: string;
     toolkitsTitle: string;
@@ -26,7 +28,7 @@ export interface Dict {
     caseTitle: string;
     caseDesc: string;
   };
-  nav: { howItWorks: string; method: string; loop: string; artifacts: string; toolkits: string; community: string; cases: string; faq: string; generator: string; allToolkits: string; library: string };
+  nav: { howItWorks: string; autonomy: string; method: string; loop: string; artifacts: string; toolkits: string; community: string; cases: string; faq: string; generator: string; allToolkits: string; library: string };
   header: { starterKit: string; toggleTheme: string; openMenu: string; downloadStarterKit: string; lang: string };
   toasts: { building: string; ready: string; readyDesc: string; failed: string; downloaded: string; copied: string; copyFailed: string; saved: string; submitting: string; required: string };
   hero: {
@@ -55,6 +57,9 @@ export interface Dict {
     requestAccess: string;
   };
   autonomySection: { num: string; label: string; title: string; lede: string; level: string; boundary: string };
+  homeWhy: { num: string; label: string; title: string; lede: string; points: string[] };
+  getStarted: { num: string; label: string; title: string; lede: string; useTitle: string; useBody: string; useButton: string; apiTitle: string; apiBody: string; apiButton: string };
+  methodReference: { eyebrow: string; title: string; lede: string };
   whyHad: {
     num: string; label: string; title: string; lede: string;
     agileTitle: string; agileKicker: string; agile: string[];

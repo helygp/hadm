@@ -4,6 +4,8 @@ export const en: Dict = {
   meta: {
     siteTitle: "HAD Method — Human-Governed Agentic Delivery",
     siteDesc: "An open protocol for typed autonomy decisions: proceed, escalate, or deny under explicit human governance.",
+    methodTitle: "Method Reference — HAD Method",
+    methodDesc: "The full HAD Method reference: definition, operating loop, use cases, and FAQ.",
     artifactsTitle: "Artifact Library — HAD Method",
     artifactsDesc: "Browse, preview, and download every HAD Method artifact: manifesto, canvas, prompts, agents, checklists, and templates.",
     toolkitsTitle: "AI Toolkits — HAD Method",
@@ -17,7 +19,7 @@ export const en: Dict = {
     caseTitle: "Suggest a Use Case — HAD Method",
     caseDesc: "Submit a use case where the HAD Method applies.",
   },
-  nav: { howItWorks: "How it works", method: "Method", loop: "Loop", artifacts: "Artifacts", toolkits: "Toolkits", community: "Community", cases: "Cases", faq: "FAQ", generator: "Generator", allToolkits: "All Toolkits", library: "Artifact Library" },
+  nav: { howItWorks: "How it works", autonomy: "Autonomy", method: "Method", loop: "Loop", artifacts: "Artifacts", toolkits: "Toolkits", community: "Community", cases: "Cases", faq: "FAQ", generator: "Generator", allToolkits: "All Toolkits", library: "Artifact Library" },
   header: { starterKit: "Starter Kit", toggleTheme: "Toggle theme", openMenu: "Open menu", downloadStarterKit: "Download Starter Kit", lang: "Language" },
   toasts: { building: "Building Starter Kit…", ready: "Starter Kit ready", readyDesc: "HAD-Starter-Kit.zip downloaded.", failed: "Download failed", downloaded: "Downloaded", copied: "Copied", copyFailed: "Copy failed", saved: "Saved to Starter Kit", submitting: "Submitting…", required: "Required fields missing" },
   hero: {
@@ -51,6 +53,26 @@ export const en: Dict = {
     }, requestAccess: "Request early access",
   },
   autonomySection: { num: "P02", label: "Autonomy levels", title: "Autonomy your system can name.", lede: "Every decision is tied to one of these. Not a vibe. A field in the response.", level: "Level", boundary: "Execution boundary" },
+  homeWhy: {
+    num: "P03", label: "Why HAD", title: "Decisions need a protocol now.",
+    lede: "When agents do the work, governance cannot live only in meetings. HAD makes intent, risk, autonomy, and evidence explicit before action happens.",
+    points: [
+      "Autonomy becomes a typed decision, not an implied team norm.",
+      "Humans stay responsible for intent, boundaries, and risk acceptance.",
+      "Agents can move faster because your system knows when to proceed, escalate, or deny.",
+    ],
+  },
+  getStarted: {
+    num: "P04", label: "Get started", title: "Start with instructions. Move toward the gate.",
+    lede: "Use HAD today as tool instructions, or request early access to the protocol layer for agent decisions.",
+    useTitle: "Use it now", useBody: "Generate a tool-specific Markdown file for Claude, ChatGPT, Gemini, Lovable, Cursor, Copilot, Windsurf, Replit, n8n, or a generic agent.", useButton: "Open generator",
+    apiTitle: "Get API access", apiBody: "Join the early-access list for HAD Gate and test typed autonomy decisions when the protocol opens.", apiButton: "Request API access",
+  },
+  methodReference: {
+    eyebrow: "HAD Method · Full reference",
+    title: "The deeper operating model behind the protocol.",
+    lede: "A complete reference for how HAD defines human governance, agentic delivery, autonomy levels, operating loops, use cases, and practical adoption questions.",
+  },
   whyHad: {
     num: "01", label: "Why HAD",
     title: "Agile organized humans. HAD organizes intelligence.",
@@ -138,7 +160,7 @@ export const en: Dict = {
   },
   faqSection: { num: "07", label: "FAQ", title: "Questions, answered with clarity.", lede: "What HAD is, what it isn't, and how to start using it with your tools today." },
   faqs: [
-    { q: "Does the HAD Method replace Agile?", a: "No. HAD extends delivery thinking into a world where AI agents can take part in conception, production, and evolution." },
+    { q: "Does the HAD Method replace Agile?", a: "No. HAD is not trying to win the ‘Agile is dead’ debate. It changes how decisions are made when an agent, not a person, is doing the work: autonomy becomes an explicit typed value per decision, not an implied norm inside a ceremony." },
     { q: "Is it only for software development?", a: "No. HAD applies to digital products, automation, service portals, AI workflows, internal tools, enterprise platforms, and transformation initiatives." },
     { q: "Does HAD remove humans from delivery?", a: "No. HAD repositions humans toward governance, accountability, value validation, and strategic decisions." },
     { q: "Can agents really conceive products?", a: "Agents can research, synthesize, generate hypotheses, map journeys, propose solutions, and create artifacts. Humans must set boundaries and approve critical decisions." },
